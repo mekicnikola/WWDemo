@@ -5,6 +5,7 @@ using WWDemo.Application.DTOs;
 using WWDemo.Application.Products.Commands.AddProduct;
 using WWDemo.Application.Products.Queries.GetAllProducts;
 using WWDemo.Application.Products.Queries.GetProductBySerialNumber;
+using WWDemo.Data.Products;
 
 namespace WWDemo.Api.Controllers
 {
@@ -43,12 +44,12 @@ namespace WWDemo.Api.Controllers
 			return result;
 		}
 
-		[HttpGet("serial-number")]
-		public async Task<IActionResult> GetProductBySerialNumber([FromRoute(Name = "serial-number")]int serialNumber)
+		[HttpGet("{serial-number}")]
+		public async Task<ProductRepresentation> GetProductBySerialNumber([FromRoute(Name = "serial-number")]string serialNumber)
 		{
-            var result = await _mediator.Send(new GetProductBySerialNumberQuery());// map serial number
+            var result = await _mediator.Send(new GetProductBySerialNumberQuery { SerialNumber = serialNumber });// map serial number
             
-			return Ok();
+			return result;
 		}
 
 		[HttpDelete]
