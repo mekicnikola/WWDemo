@@ -8,6 +8,8 @@ namespace WWDemo.Data.Products
 
         Task<Product?> GetProductById(Guid productId);
 
+        Task<Product?> GetProductBySerialNumber(string serialNumber);
+
         Task<Product?> AddProduct(Product product);
 
         Task<Product?> UpdateProduct(Product product);
